@@ -54,3 +54,8 @@ DerivedData/
 *.exe
 *.out
 *.app
+
+#folders
+
+.DS_Store
+IDJ_2018_Xcode.xcodeproj/
