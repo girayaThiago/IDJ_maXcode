@@ -20,8 +20,9 @@ State::State() {
 
 void State::LoadAssets() {
     printf("LoadAssets()\n");
-    music.Open("./audio/stageState.ogg");
     bg.Open("./img/ocean.jpg");
+    music.Open("./audio/stageState.ogg");
+    music.Play(); /// só para testar
     
 
 }

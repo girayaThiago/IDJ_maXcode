@@ -42,7 +42,7 @@ Game::Game(const char* title, int width, int height){
         std::cout << "Error creating Renderer!" << std::endl;
         exit(-1);
     }
-    
+
     state = new State();
 }
 
@@ -72,9 +72,10 @@ Game* Game::GetInstance() {
 
 void Game::Run(){
     state->LoadAssets();
+    
     if (state->QuitRequested() == false) std::cout << "false\n"; else std::cout << "true\n";
     while (state->QuitRequested() == false){
-         state->Update(1);
+         state->Update(0.033);
          state->Render();
          SDL_RenderPresent(renderer);
          SDL_Delay(33);
