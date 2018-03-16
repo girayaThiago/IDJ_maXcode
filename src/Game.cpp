@@ -6,7 +6,8 @@
 //  Copyright © 2018 Thiago Dantas. All rights reserved.
 //
 const int WIDTH = 1024, HEIGHT = 600;
-#include "Game.h"
+//#include "Game.h"
+#include "../include/Game.h"
 
 Game* Game::instance = nullptr;
 

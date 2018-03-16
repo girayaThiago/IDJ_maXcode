@@ -7,8 +7,8 @@
 //
 
 
-#include "Sprite.h"
-#include "Game.h"
+#include "../include/Sprite.h"
+#include "../include/Game.h"
 
 Sprite::Sprite(){
 //    std::cout << "Init Sprite()\n";

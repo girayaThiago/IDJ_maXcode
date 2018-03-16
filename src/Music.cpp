@@ -7,7 +7,7 @@
 //
 
 
-#include "Music.h"
+#include "../include/Music.h"
 
 Music::Music(){
     music = nullptr;

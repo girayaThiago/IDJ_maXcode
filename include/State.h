@@ -5,15 +5,16 @@
 //  Created by Thiago Dantas on 11/03/18.
 //  Copyright © 2018 Thiago Dantas. All rights reserved.
 //
+#pragma once
 
 #ifndef State_h
 #define State_h
 
 #define INCLUDE_SDL
 
-#include "Sprite.h"
-#include "Music.h"
-#include "SDL_include.h"
+#include "../include/Sprite.h"
+#include "../include/Music.h"
+#include "../include/SDL_include.h"
 
 class State{
 private:

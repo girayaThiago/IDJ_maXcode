@@ -5,6 +5,7 @@
 //  Created by Thiago Dantas on 11/03/18.
 //  Copyright © 2018 Thiago Dantas. All rights reserved.
 //
+#pragma once
 
 #ifndef Music_h
 #define Music_h

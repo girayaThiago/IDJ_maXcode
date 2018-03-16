@@ -6,12 +6,14 @@
 //  Copyright © 2018 Thiago Dantas. All rights reserved.
 //
 
-#include "Game.h"
+#include <iostream>
+#include "../include/Game.h"
+//#include "Game.h"
 
 int main(int argc, const char * argv[]) {
     std::cout << "main()\n";
     
-   Game::GetInstance()->Run();
+    Game::GetInstance()->Run();
 
     return 0;
 }

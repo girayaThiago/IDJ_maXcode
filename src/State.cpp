@@ -8,7 +8,9 @@
 
 #include <iostream>
 
-#include "State.h"
+#include "../include/Game.h"
+#include "../include/State.h"
+
 
 State::State() {
     quitRequested = false;
@@ -20,8 +22,8 @@ State::State() {
 
 void State::LoadAssets() {
     printf("LoadAssets()\n");
-    bg.Open("./img/ocean.jpg");
-    music.Open("./audio/stageState.ogg");
+    bg.Open("./assets/img/ocean.jpg");
+    music.Open("./assets/audio/stageState.ogg");
     music.Play(); /// só para testar
     
 

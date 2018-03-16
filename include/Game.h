@@ -6,6 +6,8 @@
 //  Copyright © 2018 Thiago Dantas. All rights reserved.
 //
 
+#pragma once
+
 #ifndef Game_h
 #define Game_h
 
@@ -13,8 +15,8 @@
 #define INCLUDE_SDL
 #define INCLUDE_SDL_MIXER
 #define INCLUDE_SDL_IMAGE
-#include "State.h"
-#include "SDL_include.h"
+#include "../include/State.h"
+#include "../include/SDL_include.h"
 
 class Game{
 private:
