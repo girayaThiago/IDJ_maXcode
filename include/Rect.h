@@ -1,5 +1,5 @@
 //
-//  Rect.hpp
+//  Rect.h
 //  linkSDL
 //
 //  Created by Thiago Dantas on 17/03/18.
@@ -12,5 +12,23 @@
 #define Rect_h
 
 #include <stdio.h>
+#include "Vec2.h"
+
+class Rect {
+public:
+    float x;
+    float y;
+    float w;
+    float h;
+    Rect();
+    Rect(float& x, float& y,
+         float& w, float& h);
+    Vec2 GetCenter();
+    Rect& operator+(const Vec2& rhs);
+    Rect& operator-(const Vec2& rhs);
+    bool IsPointInside(Vec2& p);
+    float DistanceTo(Rect& r);
+    
+};
 
 #endif /* Rect_h */
