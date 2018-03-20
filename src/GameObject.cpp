@@ -6,4 +6,5 @@
 //  Copyright © 2018 Thiago Dantas. All rights reserved.
 //
 
-#include "GameObject.hpp"
+#include "../include/GameObject.h"
+

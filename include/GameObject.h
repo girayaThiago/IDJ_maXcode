@@ -6,9 +6,19 @@
 //  Copyright © 2018 Thiago Dantas. All rights reserved.
 //
 
+#pragma once
+
 #ifndef GameObject_h
 #define GameObject_h
 
 #include <stdio.h>
+
+class Component;
+
+class GameObject{
+public:
+    GameObject();
+};
+
 
 #endif /* GameObject_h */
