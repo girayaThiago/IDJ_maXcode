@@ -1,5 +1,5 @@
 //
-//  Game.hpp
+//  Game.h
 //  IDJ_2018
 //
 //  Created by Thiago Dantas on 11/03/18.

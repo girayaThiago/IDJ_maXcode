@@ -12,13 +12,16 @@
 
 #define INCLUDE_SDL
 
+#include <vector>
 #include "../include/Sprite.h"
 #include "../include/Music.h"
 #include "../include/SDL_include.h"
+#include "../include/GameObject.h"
 
 class State{
 private:
     Sprite bg;
+    std::vector<GameObject> objects;
     Music music;
     bool quitRequested;
 

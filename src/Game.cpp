@@ -74,7 +74,6 @@ Game* Game::GetInstance() {
 void Game::Run(){
     state->LoadAssets();
     
-    if (state->QuitRequested() == false) std::cout << "false\n"; else std::cout << "true\n";
     while (state->QuitRequested() == false){
          state->Update(0.033);
          state->Render();
