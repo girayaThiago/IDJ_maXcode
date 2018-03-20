@@ -6,4 +6,4 @@
 //  Copyright © 2018 Thiago Dantas. All rights reserved.
 //
 
-#include "Component.h"
+#include "../include/Component.h"

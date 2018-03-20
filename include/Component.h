@@ -12,5 +12,21 @@
 #define Component_h
 
 #include <stdio.h>
+#include <string>
+#include "../include/GameObject.h"
+
+class GameObject;
+
+class Component{
+public:
+    Component(GameObject associated);
+    ~Component();
+    void virtual Update(float dt);
+    void virtual Render();
+    bool virtual Is(std::string type);
+protected:
+    GameObject& associated;
+};
+
 
 #endif /* Component_h */
