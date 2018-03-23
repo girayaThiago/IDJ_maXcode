@@ -1,2 +1,5 @@
-# IDJ_2018_makefile
-Refazendo projeto de IDJ fora do Xcode
+14/0170961
+Thiago Pereira Ribeiro Dantas
+
+Projeto se encontra em:
+https://github.com/girayaThiago/IDJ_maXcode
