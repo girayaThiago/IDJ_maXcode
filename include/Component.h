@@ -19,7 +19,7 @@ class GameObject;
 
 class Component{
 public:
-    Component(GameObject associated);
+    Component(GameObject& associated);
     ~Component();
     void virtual Update(float dt);
     void virtual Render();
