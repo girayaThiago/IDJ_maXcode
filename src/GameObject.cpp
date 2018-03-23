@@ -8,3 +8,50 @@
 
 #include "../include/GameObject.h"
 
+GameObject::GameObject(){
+    isDead = false;
+}
+
+GameObject::~GameObject(){
+    while (components.size()){
+        Component* c = components[components.size()-1];
+        components.erase(components.begin()+components.size()-1);
+        delete c;
+    }
+}
+
+void GameObject::Update(float dt){
+    for (int i = 0; i < components.size(); i++){
+        components[i]->Update(dt);
+    }
+}
+
+void GameObject::Render(){
+    for (int i = 0; i < components.size(); i++){
+        components[i]->Render();
+    }
+}
+
+bool GameObject::IsDead(){
+    return isDead;
+}
+
+void GameObject::RequestDelete(){
+    isDead = true;
+}
+
+void GameObject::AddComponent(Component* cpt){
+    components.push_back(cpt);
+}
+
+void GameObject::RemoveComponent(Component* cpt){
+    components.erase(find(components.begin(), components.end(), cpt));
+}
+
+Component* GameObject::GetComponent(std::string type){
+    Component* c = nullptr;
+    for (int i = 0; i < components.size() && c == nullptr; i++){
+        if (components[i]->Is(type)) c = components[i];
+    }
+    return c;
+}
