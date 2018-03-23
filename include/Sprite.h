@@ -14,17 +14,19 @@
 #define INCLUDE_SDL_IMAGE
 
 #include <iostream>
+#include "../include/Component.h"
 #include "../include/SDL_include.h"
 
-class Sprite{
+
+class Sprite: public Component{
 private:
     SDL_Texture* texture;
     int width;
     int height;
     SDL_Rect clipRect;
 public:
-    Sprite();
-    Sprite(const char* file);
+    Sprite(GameObject& associated);
+    Sprite(const char* file, GameObject& associated);
     ~Sprite();
     void Open(const char* file);
     void SetClip(int x, int y,

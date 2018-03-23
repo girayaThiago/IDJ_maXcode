@@ -10,12 +10,16 @@
 #include "../include/Sprite.h"
 #include "../include/Game.h"
 
-Sprite::Sprite(){
-//    std::cout << "Init Sprite()\n";
+//Sprite::Sprite(){
+////    std::cout << "Init Sprite()\n";
+//    texture = nullptr;
+//}
+
+Sprite::Sprite(GameObject& associated) : Component(associated){
     texture = nullptr;
 }
 
-Sprite::Sprite(const char* file){
+Sprite::Sprite(const char* file, GameObject& associated) : Component(associated){
 //    std::cout << "Init Sprite(file)\n";
     texture = nullptr;
     Open(file);
@@ -35,7 +39,7 @@ void Sprite::Open(const char* file){
         texture = nullptr;
     }
 
-    texture = IMG_LoadTexture(Game::GetInstance()->GetRenderer(), file);
+    texture = IMG_LoadTexture(Game::GetInstance().GetRenderer(), file);
     if (texture == nullptr) {
         std::cout << "error loading texture SDL Error: " << SDL_GetError() << std::endl;
         exit(-1);
@@ -48,7 +52,7 @@ void Sprite::Open(const char* file){
 }
 
 void Sprite::SetClip(int x, int y,
-                     int w, int h){
+                     int w, int h){ 
     clipRect.x = x;
     clipRect.y = y;
 
@@ -62,7 +66,7 @@ void Sprite::Render(int x, int y){
     dst.y = y;
     dst.w = clipRect.w;
     dst.h = clipRect.h;
-    SDL_RenderCopy(Game::GetInstance()->GetRenderer(), texture, &clipRect, &dst);
+    SDL_RenderCopy(Game::GetInstance().GetRenderer(), texture, &clipRect, &dst);
 }
 
 int Sprite::GetWidth(){
@@ -71,6 +75,14 @@ int Sprite::GetWidth(){
 
 int Sprite::GetHeight(){
     return height;
+}
+
+int Sprite::Update(float dt){
+    
+}
+
+int Sprite::Is(std::string type){
+    return "Sprite";
 }
 
 bool Sprite::IsOpen(){

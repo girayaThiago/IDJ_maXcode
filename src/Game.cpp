@@ -11,7 +11,7 @@ const int WIDTH = 1024, HEIGHT = 600;
 
 Game* Game::instance = nullptr;
 
-Game::Game(const char* title, int width, int height){
+Game::Game(std::string title, int width, int height){
     printf("%p\n", this);
     /// Initializing SDL
     std::cout << "Init Game(title, width,height)\n";
@@ -31,8 +31,7 @@ Game::Game(const char* title, int width, int height){
         exit(-1);
     }
     Mix_AllocateChannels(32);
-
-    this->window = SDL_CreateWindow("Thiago Dantas 14/0170961", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0);
+    this->window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0);
     if (window == nullptr) {
         std::cout << "Error creating SDL_Window!" << std::endl;
         exit(-1);
@@ -64,11 +63,11 @@ SDL_Renderer* Game::GetRenderer(){
     return renderer;
 }
 
-Game* Game::GetInstance() {
+Game& Game::GetInstance() {
     if (instance == nullptr) {
-        instance = new Game("jogo", WIDTH, HEIGHT);
+        instance = new Game("Thiago Dantas 14/0170961", WIDTH, HEIGHT);
     }
-    return instance;
+    return *instance;
 }
 
 void Game::Run(){

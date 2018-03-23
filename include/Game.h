@@ -12,6 +12,7 @@
 #define Game_h
 
 #include <iostream>
+#include <string>
 #define INCLUDE_SDL
 #define INCLUDE_SDL_MIXER
 #define INCLUDE_SDL_IMAGE
@@ -24,10 +25,10 @@ private:
     SDL_Window* window;
     SDL_Renderer* renderer;
     State* state;
-    Game(const char* title, int width, int height);
+    Game(std::string title, int width, int height);
 public:
     ~Game();
-    static Game* GetInstance();
+    static Game& GetInstance();
     void Run();
     State* GetState();
     SDL_Renderer* GetRenderer();
