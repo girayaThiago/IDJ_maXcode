@@ -46,9 +46,18 @@ Rect& Rect::operator-(const Vec2& rhs){
 
 /// TODO;
 bool Rect::IsPointInside(Vec2& p){
-    return true;
+    bool inside = true;
+    if (p.x < x || p.x > x+w) inside = false;
+    if (p.y < y || p.y > y+h) inside = false;
+    return inside;
 }
 
+bool Rect::Contains(float px, float py){
+    bool inside = true;
+    if (px < x || px > x+w) inside = false;
+    if (py < y || py > y+h) inside = false;
+    return inside;
+}
 float Rect::DistanceTo(Rect& r){
     return (this->GetCenter() - r.GetCenter()).Magnitude();
 }

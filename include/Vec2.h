@@ -30,7 +30,7 @@ public:
     float DistanceTo (Vec2 v);
     float Inclination();
     float InclinationWith (Vec2 v);
-    Vec2 Rotate(float angle);
+    Vec2 GetRotated(float angle);
 };
 
 

@@ -27,6 +27,7 @@ public:
     Rect& operator+(const Vec2& rhs);
     Rect& operator-(const Vec2& rhs);
     bool IsPointInside(Vec2& p);
+    bool Contains(float px, float py);
     float DistanceTo(Rect& r);
     
 };

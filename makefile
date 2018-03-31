@@ -4,6 +4,7 @@ SRCDIR = src
 INCDIR = include
 BINDIR = bin
 OBJDIR = object
+CFLAGS = -std=c++11
 LFLAGS = -lSDL2 -lSDL2_image -lSDL2_mixer
 
 BIN = $(BINDIR)/$(EXECNAME)
@@ -14,10 +15,10 @@ run: all
 	./jogo.out
 
 all: $(OBJ)
-	$(CC) $(OBJ) $(LFLAGS)  -o $(EXECNAME) -g -ggdb
+	$(CC) $(CFLAGS) $(OBJ) $(LFLAGS) -o $(EXECNAME) -g
 
 %.o: $(patsubst $(OBJDIR)/%.o, $(SRCDIR)/%.cpp, $@)
-	$(CC) -c $(patsubst $(OBJDIR)/%.o, $(SRCDIR)/%.cpp, $@) -o $@ -g -ggdb
+	$(CC) $(CFLAGS) -c $(patsubst $(OBJDIR)/%.o, $(SRCDIR)/%.cpp, $@) -o $@ -g
 
 clean:
 	rm -f $(OBJ) *~

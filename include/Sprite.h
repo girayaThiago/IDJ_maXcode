@@ -26,15 +26,21 @@ private:
     SDL_Rect clipRect;
 public:
     Sprite(GameObject& associated);
-    Sprite(const char* file, GameObject& associated);
+    Sprite(GameObject& associated, std::string file);
     ~Sprite();
-    void Open(const char* file);
+    
+    void Open(std::string file);
     void SetClip(int x, int y,
                  int w, int h);
-    void Render (int x, int y);
     int GetWidth();
     int GetHeight();
     bool IsOpen();
+    
+    Sprite& operator= (Sprite const& other);
+    // Override Component
+    void Render ();
+    void Update(float dt);
+    bool Is(std::string type);
 };
 
 

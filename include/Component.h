@@ -20,10 +20,10 @@ class GameObject;
 class Component{
 public:
     Component(GameObject& associated);
-    ~Component();
-    void virtual Update(float dt);
-    void virtual Render();
-    bool virtual Is(std::string type);
+    virtual ~Component();
+    void virtual Update(float dt) = 0;
+    void virtual Render() = 0;
+    bool virtual Is(std::string type) = 0;
 protected:
     GameObject& associated;
 };

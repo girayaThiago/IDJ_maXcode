@@ -10,12 +10,32 @@
 #ifndef Sound_h
 #define Sound_h
 
-#include <stdio.h>
-#include "../include/Component.h"
+#define INCLUDE_SDL
+#define INCLUDE_SDL_MIXER
 
-class Sound{
+
+#include <stdio.h>
+#include "../include/GameObject.h"
+#include "../include/Component.h"
+#include "../include/SDL_include.h"
+
+class Sound : public Component{
 public:
+    Sound(GameObject& associated);
+    Sound(GameObject& associated, std::string file);
+    ~Sound();
+    void Play(int times = 1);
+    void Stop();
+    void Open(std::string file);
+    bool IsOpen();
     
+    // Override Component
+    void Update(float dt);
+    void Render();
+    bool Is(std::string type);
+private:
+    Mix_Chunk* chunk;
+    int channel;
 };
 
 #endif /* Sound_h */

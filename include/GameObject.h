@@ -23,8 +23,6 @@ public:
     GameObject();
     ~GameObject();
     
-    Rect box;
-    
     void Update(float dt);
     void Render();
     bool IsDead();
@@ -32,9 +30,11 @@ public:
     void AddComponent(Component* cpt);
     void RemoveComponent(Component* cpt);
     Component* GetComponent(std::string type);
+    
+    Rect box;
 private:
-    bool isDead;
     std::vector<Component*> components;
+    bool isDead;
 };
 
 

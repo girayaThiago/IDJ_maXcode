@@ -26,19 +26,23 @@ Vec2& Vec2::operator+(const Vec2& rhs){
     this->y += rhs.y;
     return *this;
 }
+
 Vec2& Vec2::operator-(const Vec2& rhs){
     this->x -= rhs.x;
     this->y -= rhs.y;
     return *this;
 }
+
 Vec2& Vec2::operator*(const float& rhs){
     this->x *= rhs;
     this->y *= rhs;
     return *this;
 }
+
 Vec2& operator*(float& lhs, Vec2& rhs){
     return rhs * lhs;
 }
+
 Vec2& Vec2::operator/(const float& rhs){
     this->x /= rhs;
     this->y /= rhs;
@@ -70,9 +74,14 @@ float Vec2::InclinationWith (Vec2 v){
 }
 
 /// TODO
-Vec2 Vec2::Rotate(float angle){
+Vec2 Vec2::GetRotated(float angle){
     // M_PI rad = 180º
     // 1 rad = 180 / M_PI
-    // float rad = 180 / M_PI;
-    return Vec2();
+    float rad = 180 / M_PI;
+    float angleInRad = angle/rad;
+    float rotX = x * cos(angleInRad) - y * sin(angleInRad);
+    float rotY = x * sin(angleInRad) + y * cos(angleInRad);
+    return Vec2(rotX, rotY);
 }
+
+
