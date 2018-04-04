@@ -16,33 +16,24 @@
 
 State::State() {
     quitRequested = false;
-//    std::cout << "State initialized" << std::endl;
-//    bg = Sprite();
-//    objects[0]->AddComponent(&bg);
-    
-    
-    
     music = Music();
-
 }
 
 void State::LoadAssets() {
     GameObject *background = new GameObject();
+    background->box.x = 0;
+    background->box.y = 0;
     Sprite *bg = new Sprite(*background, "./assets/img/ocean.jpg");
     background->AddComponent(bg);
     objectArray.emplace_back(background);
-    
-//    printf("LoadAssets()\n");
-//    bg.Open("./assets/img/ocean.jpg");
-//    music.Open("./assets/audio/stageState.ogg");
-//    music.Play(); /// só para testar
-    
+
+    music.Open("./assets/audio/stageState.ogg");
+    music.Play(); /// só para testar
 
 }
 
 State::~State(){
     objectArray.clear();
-    
 }
 
 void State::Input(){
@@ -64,7 +55,7 @@ void State::Input(){
         if(event.type == SDL_MOUSEBUTTONDOWN) {
             
             // Percorrer de trás pra frente pra sempre clicar no objeto mais de cima
-            for(int i = (int)objectArray.size(); i >= 0; --i) {
+            for(int i = (int)objectArray.size()-1; i >= 0; i--) {
                 // Obtem o ponteiro e casta pra Face.
                 GameObject* go = (GameObject*) objectArray[i].get();
                 // Nota: Desencapsular o ponteiro é algo que devemos evitar ao máximo.
@@ -72,8 +63,8 @@ void State::Input(){
                 // ao usar get(), violamos esse princípio e estamos menos seguros.
                 // Esse código, assim como a classe Face, é provisório. Futuramente, para
                 // chamar funções de GameObjects, use objectArray[i]->função() direto.
-                
-                if(go->box.Contains( (float)mouseX, (float)mouseY) ) {
+//                std::cout << "box " << i << ":\n\tx: " << go->box.x << " y: " << go->box.y << "\n\tw: " << go->box.w << " h: " << go->box.h << std::endl;
+                if(go->box.Contains( mouseX, mouseY) ) {
                     Face* face = (Face*)go->GetComponent( "Face" );
                     if ( nullptr != face ) {
                         // Aplica dano
@@ -118,14 +109,19 @@ void State::Render(){
 }
 
 void State::AddObject(int mouseX, int mouseY){
-    std::unique_ptr<GameObject> obj(new GameObject());
-    Sprite* pengimg = new Sprite(*obj, "./assets/img/penguin.png");
+    GameObject* obj = new GameObject();
+    obj->box.x = mouseX;
+    obj->box.y = mouseY;
+    objectArray.emplace_back(obj);
+    Sprite* pengimg = new Sprite(*obj, "./assets/img/penguinface.png");
     Sound* pengsound = new Sound(*obj, "./assets/audio/boom.wav");
     Face* pengface = new Face(*obj);
+//    std::unique_ptr<Face> pengface(new Face(*obj)); //opção unique_ptr
     obj->AddComponent(pengimg);
     obj->AddComponent(pengsound);
     obj->AddComponent(pengface);
-    objectArray.emplace_back(obj);
+    
+    
 }
 
 bool State::QuitRequested() {

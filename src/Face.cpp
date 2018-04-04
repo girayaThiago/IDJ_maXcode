@@ -10,10 +10,16 @@
 
 Face::Face(GameObject& associated): Component(associated){
     hitpoints = 30;
+    printf("Face intanciada! HP = %d\n", hitpoints);
 }
 
 void Face::Damage(int damage){
     hitpoints -= damage;
+    printf("apanhou! vida restante: %d\n", hitpoints);
+    if (hitpoints <= 0){
+        printf("morreu! vida atual: %d\n", hitpoints);
+        associated.RequestDelete();
+    }
 }
 
 // Override Component

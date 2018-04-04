@@ -7,7 +7,7 @@
 //
 
 #include "../include/Rect.h"
-
+#include <iostream>
 
 Rect::Rect(){
     x = 0;
@@ -54,6 +54,7 @@ bool Rect::IsPointInside(Vec2& p){
 
 bool Rect::Contains(float px, float py){
     bool inside = true;
+//    std::cout << "rect:\n x: " << x << " y: " << y << "\nw: " << w << " h: " << h << std::endl;
     if (px < x || px > x+w) inside = false;
     if (py < y || py > y+h) inside = false;
     return inside;

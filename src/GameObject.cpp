@@ -43,18 +43,28 @@ void GameObject::RequestDelete(){
 }
 
 void GameObject::AddComponent(Component* cpt){
+    printf("\nInserir! %p\n", cpt);
     components.emplace_back(cpt);
+    printf("\nInseriu! %p\n", cpt);
+    
 }
 
 void GameObject::RemoveComponent(Component* cpt){
-    components.erase(find(components.begin(), components.end(), cpt));
+    for (int  i = 0; i < components.size(); i++){
+        if (components[i].get() == cpt) {
+            components.erase(components.begin()+i);
+            break;
+        }
+    }
+    
 }
 
 Component* GameObject::GetComponent(std::string type){
     Component* c = nullptr;
-    for (int i = 0; i < components.size() && c == nullptr; i++){
+    for (int i = 0; i < components.size(); i++){
         if (components[i]->Is(type)) {
             c = components[i].get();
+            break;
         }
     }
     return c;

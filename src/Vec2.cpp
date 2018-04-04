@@ -78,7 +78,7 @@ Vec2 Vec2::GetRotated(float angle){
     // M_PI rad = 180º
     // 1 rad = 180 / M_PI
     float rad = 180 / M_PI;
-    float angleInRad = angle/rad;
+    float angleInRad = angle;
     float rotX = x * cos(angleInRad) - y * sin(angleInRad);
     float rotY = x * sin(angleInRad) + y * cos(angleInRad);
     return Vec2(rotX, rotY);

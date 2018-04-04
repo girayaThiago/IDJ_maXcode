@@ -13,11 +13,9 @@
 
 Sprite::Sprite(GameObject& associated) : Component(associated){
     this->texture = nullptr;
-    this->associated = associated;
 }
 
 Sprite::Sprite(GameObject& associated, std::string file) : Component(associated){
-    this->associated = associated;
     texture = nullptr;
     Open(file);
 }
@@ -78,11 +76,11 @@ int Sprite::GetHeight(){
     return height;
 }
 
-void Update(float dt) {
+void Sprite::Update(float dt) {
     
 }
 
-bool Is(std::string type){
+bool Sprite::Is(std::string type){
     return type.compare("Sprite") == 0 ? true : false;
 }
 
