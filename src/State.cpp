@@ -6,6 +6,7 @@
 //  Copyright © 2018 Thiago Dantas. All rights reserved.
 //
 
+#include <memory>
 #include <iostream>
 
 #include "../include/Game.h"
@@ -13,15 +14,12 @@
 #include "../include/Face.h"
 #include "../include/Sound.h"
 
-
-
 State::State() {
     quitRequested = false;
 //    std::cout << "State initialized" << std::endl;
-    objects.emplace_back(new GameObject());
-    GameObject g = GameObject();
-    bg = Sprite(g, "./assets/img/penguin.png");
-    objects[0]->AddComponent(&bg);
+//    bg = Sprite();
+//    objects[0]->AddComponent(&bg);
+    
     
     
     music = Music();
@@ -29,6 +27,11 @@ State::State() {
 }
 
 void State::LoadAssets() {
+    GameObject *background = new GameObject();
+    Sprite *bg = new Sprite(*background, "./assets/img/ocean.jpg");
+    background->AddComponent(bg);
+    objectArray.emplace_back(background);
+    
 //    printf("LoadAssets()\n");
 //    bg.Open("./assets/img/ocean.jpg");
 //    music.Open("./assets/audio/stageState.ogg");
@@ -38,7 +41,7 @@ void State::LoadAssets() {
 }
 
 State::~State(){
-    objects.clear();
+    objectArray.clear();
     
 }
 
@@ -61,9 +64,9 @@ void State::Input(){
         if(event.type == SDL_MOUSEBUTTONDOWN) {
             
             // Percorrer de trás pra frente pra sempre clicar no objeto mais de cima
-            for(int i = objects.size() - 1; i >= 0; --i) {
+            for(int i = (int)objectArray.size(); i >= 0; --i) {
                 // Obtem o ponteiro e casta pra Face.
-                GameObject* go = (GameObject*) objects[i].get();
+                GameObject* go = (GameObject*) objectArray[i].get();
                 // Nota: Desencapsular o ponteiro é algo que devemos evitar ao máximo.
                 // O propósito do unique_ptr é manter apenas uma cópia daquele ponteiro,
                 // ao usar get(), violamos esse princípio e estamos menos seguros.
@@ -98,19 +101,19 @@ void State::Input(){
 void State::Update(float dt){
     Input();
     
-    for (int i = 0;  i < objects.size(); i++){
-        objects[i].get()->Update(dt);
+    for (int i = 0;  i < objectArray.size(); i++){
+        objectArray[i].get()->Update(dt);
     }
     
-    for (int i = (int)objects.size(); i >= 0; i--){
-        if (objects[i]->IsDead()) objects.erase(objects.begin()+i);
+    for (int i = (int)objectArray.size()-1; i >= 0; i--){
+        if (objectArray[i]->IsDead()) objectArray.erase(objectArray.begin()+i);
     }
 }
 
 void State::Render(){
 //    bg.Render(0,-0);
-    for (int i = 0; i < objects.size(); i++){
-        objects[i]->Render();
+    for (int i = 0; i < objectArray.size(); i++){
+        objectArray[i]->Render();
     }
 }
 
@@ -122,7 +125,7 @@ void State::AddObject(int mouseX, int mouseY){
     obj->AddComponent(pengimg);
     obj->AddComponent(pengsound);
     obj->AddComponent(pengface);
-    objects.emplace_back(obj);
+    objectArray.emplace_back(obj);
 }
 
 bool State::QuitRequested() {

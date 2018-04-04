@@ -9,18 +9,15 @@
 
 #include "../include/Sprite.h"
 #include "../include/Game.h"
-
-//Sprite::Sprite(){
-////    std::cout << "Init Sprite()\n";
-//    texture = nullptr;
-//}
+#include <memory>
 
 Sprite::Sprite(GameObject& associated) : Component(associated){
-    texture = nullptr;
+    this->texture = nullptr;
+    this->associated = associated;
 }
 
 Sprite::Sprite(GameObject& associated, std::string file) : Component(associated){
-//    std::cout << "Init Sprite(file)\n";
+    this->associated = associated;
     texture = nullptr;
     Open(file);
 }
@@ -44,7 +41,6 @@ void Sprite::Open(std::string file){
         std::cout << "error loading texture SDL Error: " << SDL_GetError() << std::endl;
         exit(-1);
     }
-
     
     /// textura alocada, descobrir tamanho e atualizar clipRect
     SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
@@ -92,13 +88,4 @@ bool Is(std::string type){
 
 bool Sprite::IsOpen(){
     return texture != nullptr ? true : false;
-}
-
-Sprite& Sprite::operator= (Sprite const& other) {
-    this->clipRect = other.clipRect;
-    this->width = other.width;
-    this->height = other.height;
-    this->associated = other.associated;
-    this->texture = other.texture;
-    return *this;
 }

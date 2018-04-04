@@ -12,8 +12,8 @@
 
 #define INCLUDE_SDL
 
-#include <vector>
 #include <memory>
+#include <vector>
 #include "../include/Sprite.h"
 #include "../include/Music.h"
 #include "../include/SDL_include.h"
@@ -21,8 +21,8 @@
 
 class State{
 private:
-    Sprite bg;
-    std::vector<std::unique_ptr<GameObject>> objects;
+//    Sprite bg;
+    std::vector<std::unique_ptr<GameObject>> objectArray;
     Music music;
     bool quitRequested;
 

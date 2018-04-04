@@ -36,7 +36,6 @@ public:
     int GetHeight();
     bool IsOpen();
     
-    Sprite& operator= (Sprite const& other);
     // Override Component
     void Render ();
     void Update(float dt);

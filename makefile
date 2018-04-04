@@ -15,10 +15,10 @@ run: all
 	./jogo.out
 
 all: $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LFLAGS) -o $(EXECNAME) -g
+	$(CC) $(CFLAGS) $(OBJ) $(LFLAGS) -o $(EXECNAME)
 
 %.o: $(patsubst $(OBJDIR)/%.o, $(SRCDIR)/%.cpp, $@)
-	$(CC) $(CFLAGS) -c $(patsubst $(OBJDIR)/%.o, $(SRCDIR)/%.cpp, $@) -o $@ -g
+	$(CC) $(CFLAGS) -c $(patsubst $(OBJDIR)/%.o, $(SRCDIR)/%.cpp, $@) -o $@
 
 clean:
 	rm -f $(OBJ) *~

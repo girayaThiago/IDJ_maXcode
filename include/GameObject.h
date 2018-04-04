@@ -11,6 +11,7 @@
 #ifndef GameObject_h
 #define GameObject_h
 
+#include <memory>
 #include <stdio.h>
 #include <vector>
 #include "../include/Component.h"
@@ -33,7 +34,7 @@ public:
     
     Rect box;
 private:
-    std::vector<Component*> components;
+    std::vector<std::unique_ptr<Component>> components;
     bool isDead;
 };
 
