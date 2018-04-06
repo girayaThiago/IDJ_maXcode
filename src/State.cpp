@@ -93,16 +93,17 @@ void State::Update(float dt){
     Input();
     
     for (int i = 0;  i < objectArray.size(); i++){
-        objectArray[i].get()->Update(dt);
+        objectArray[i]->Update(dt);
     }
     
     for (int i = (int)objectArray.size()-1; i >= 0; i--){
-        if (objectArray[i]->IsDead()) objectArray.erase(objectArray.begin()+i);
+        if (objectArray[i]->IsDead()){
+            objectArray.erase(objectArray.begin()+i);
+        }
     }
 }
 
 void State::Render(){
-//    bg.Render(0,-0);
     for (int i = 0; i < objectArray.size(); i++){
         objectArray[i]->Render();
     }
@@ -110,16 +111,20 @@ void State::Render(){
 
 void State::AddObject(int mouseX, int mouseY){
     GameObject* obj = new GameObject();
-    obj->box.x = mouseX;
-    obj->box.y = mouseY;
-    objectArray.emplace_back(obj);
     Sprite* pengimg = new Sprite(*obj, "./assets/img/penguinface.png");
-    Sound* pengsound = new Sound(*obj, "./assets/audio/boom.wav");
-    Face* pengface = new Face(*obj);
-//    std::unique_ptr<Face> pengface(new Face(*obj)); //opção unique_ptr
+    obj->box.x = mouseX - obj->box.w/2;
+    obj->box.y = mouseY - obj->box.h/2;
     obj->AddComponent(pengimg);
+    
+    Sound* pengsound = new Sound(*obj, "./assets/audio/boom.wav");
     obj->AddComponent(pengsound);
+    
+    Face* pengface = new Face(*obj);
     obj->AddComponent(pengface);
+    
+    
+    objectArray.emplace_back(obj);
+//    pengface->Damage(0);
     
     
 }

@@ -6,6 +6,7 @@
 //  Copyright © 2018 Thiago Dantas. All rights reserved.
 //
 
+#include "../include/Sound.h"
 #include "../include/Face.h"
 
 Face::Face(GameObject& associated): Component(associated){
@@ -15,10 +16,14 @@ Face::Face(GameObject& associated): Component(associated){
 
 void Face::Damage(int damage){
     hitpoints -= damage;
+//    hitpoints = 0;
     printf("apanhou! vida restante: %d\n", hitpoints);
     if (hitpoints <= 0){
-        printf("morreu! vida atual: %d\n", hitpoints);
         associated.RequestDelete();
+//        ((Sound*) associated.GetComponent("Sound"))->Play();
+        Sound* s = (Sound*) associated.GetComponent("Sound");
+        if (s) s->Play();
+        
     }
 }
 

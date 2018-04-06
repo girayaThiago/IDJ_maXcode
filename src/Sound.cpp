@@ -12,20 +12,19 @@
 Sound::Sound(GameObject& associated) : Component(associated){
     chunk = nullptr;
 }
-Sound::Sound(GameObject& associated, std::string file) : Component(associated){
-    chunk = nullptr;
+Sound::Sound(GameObject& associated, std::string file) : Sound(associated){
     Open(file);
 }
 
 Sound::~Sound(){
     if (chunk != nullptr){
-        Mix_HaltChannel(this->channel);
+        Mix_HaltChannel(channel);
         Mix_FreeChunk(chunk);
     }
 }
 
 void Sound::Play(int times){
-    this->channel = Mix_PlayChannel(-1, chunk, times-1);
+    channel = Mix_PlayChannel(-1, chunk, times-1);
 }
 
 void Sound::Stop(){
@@ -56,6 +55,6 @@ void Sound::Render(){
     
 }
 bool Sound::Is(std::string type){
-    // TODO compare TYPE?
-    return true;
+    return (type.compare("Sound") == 0) ? true : false;
+    
 }

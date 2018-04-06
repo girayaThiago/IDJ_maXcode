@@ -14,7 +14,7 @@ GameObject::GameObject(){
 
 GameObject::~GameObject(){
 //    while (components.size()){
-//        Component* c = components[components.size()-1].get();
+//        Component* c = components[components.size()-1];
 //        components.erase(components.begin()+components.size()-1);
 //        delete c;
 //    }
@@ -43,10 +43,7 @@ void GameObject::RequestDelete(){
 }
 
 void GameObject::AddComponent(Component* cpt){
-    printf("\nInserir! %p\n", cpt);
     components.emplace_back(cpt);
-    printf("\nInseriu! %p\n", cpt);
-    
 }
 
 void GameObject::RemoveComponent(Component* cpt){
@@ -60,12 +57,10 @@ void GameObject::RemoveComponent(Component* cpt){
 }
 
 Component* GameObject::GetComponent(std::string type){
-    Component* c = nullptr;
     for (int i = 0; i < components.size(); i++){
         if (components[i]->Is(type)) {
-            c = components[i].get();
-            break;
+            return components[i].get();
         }
     }
-    return c;
+    return nullptr;
 }
