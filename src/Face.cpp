@@ -12,35 +12,26 @@
 
 Face::Face(GameObject& associated): Component(associated){
     hitpoints = 30;
-    printf("Face intanciada! HP = %d\n", hitpoints);
 }
 
 void Face::Damage(int damage){
     hitpoints -= damage;
-//    hitpoints = 0;
-    printf("apanhou! vida restante: %d\n", hitpoints);
     if (hitpoints <= 0 && !associated.IsDead()){
         Sound* s = (Sound*) associated.GetComponent("Sound");
         if (s) s->Play();
         associated.RequestDelete();
+        
+        // Remover componentes que fazem o inimigo apanhar e ser visto, update aguarda o som parar de tocar.
+        Sprite* spr = (Sprite *) associated.GetComponent("Sprite");
+        if (spr) associated.RemoveComponent(spr);
+        associated.RemoveComponent(this);
     }
 }
 
 // Override Component
 void Face::Update(float dt){
-    if (associated.IsDead()){
-        Sound* s = (Sound*) associated.GetComponent("Sound");
-        if (s) {
-            if (!s->IsPlaying()){
-                associated.RequestDelete();
-            }
-        } else {
-            associated.RequestDelete();
-        }
-    }
 }
 void Face::Render(){
-    
 }
 bool Face::Is(std::string type){
     return type.compare("Face") == 0 ? true : false;

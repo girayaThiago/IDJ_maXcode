@@ -16,9 +16,9 @@
 
 Sound::Sound(GameObject& associated) : Component(associated){
     chunk = nullptr;
-//    Mix_ChannelFinished([](int channel){
-//        printf("channel %d finished", channel);
-//    });
+    Mix_ChannelFinished([](int channel){
+        printf("channel %d finished", channel);
+    });
 }
 Sound::Sound(GameObject& associated, std::string file) : Sound(associated){
     Open(file);

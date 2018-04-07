@@ -95,16 +95,10 @@ void State::Update(float dt){
     for (int i = 0;  i < objectArray.size(); i++){
         objectArray[i]->Update(dt);
     }
-    // TODO: desfazer esse cancer que tá esse update
+    
+    // TODO: desfazer esse cancer que tá esse update, tentar implementar um callback para o gameobject.
     for (int i = (int)objectArray.size()-1; i >= 0; i--){
         if (objectArray[i]->IsDead()){
-            // Se um objeto tem de morrer, remova os componentes de face e sprite
-            Face* f = (Face *) objectArray[i]->GetComponent("Face");
-            if (f) objectArray[i]->RemoveComponent(f);
-            
-            Sprite* spr = (Sprite *) objectArray[i]->GetComponent("Sprite");
-            if (spr) objectArray[i]->RemoveComponent(spr);
-            
             // esperar o som tocar antes de remover
             Sound* s = (Sound *) objectArray[i]->GetComponent("Sound");
             if (s) if (!(s->IsPlaying())){
