@@ -16,7 +16,6 @@ Rect::Rect(){
     h = 0;
 }
 
-
 Rect::Rect(float& x, float& y,
            float& w, float& h){
     this->x = x;

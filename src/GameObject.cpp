@@ -13,14 +13,8 @@ GameObject::GameObject(){
 }
 
 GameObject::~GameObject(){
-//    while (components.size()){
-//        Component* c = components[components.size()-1];
-//        components.erase(components.begin()+components.size()-1);
-//        delete c;
-//    }
     components.clear();
 }
-
 
 void GameObject::Update(float dt){
     for (int i = 0; i < components.size(); i++){
@@ -53,7 +47,6 @@ void GameObject::RemoveComponent(Component* cpt){
             break;
         }
     }
-    
 }
 
 Component* GameObject::GetComponent(std::string type){

@@ -7,10 +7,18 @@
 //
 
 #include <iostream>
+#include "../include/Game.h"
 #include "../include/Sound.h"
+
+//void ChannelDone(int channel){
+////    associated.RequestDelete();
+//}
 
 Sound::Sound(GameObject& associated) : Component(associated){
     chunk = nullptr;
+//    Mix_ChannelFinished([](int channel){
+//        printf("channel %d finished", channel);
+//    });
 }
 Sound::Sound(GameObject& associated, std::string file) : Sound(associated){
     Open(file);
@@ -48,12 +56,18 @@ bool Sound::IsOpen(){
     return chunk ? true : false;
 }
 
+bool Sound::IsPlaying(){
+    return Mix_Playing(this->channel);
+}
+
 void Sound::Update(float dt){
     
 }
+
 void Sound::Render(){
     
 }
+
 bool Sound::Is(std::string type){
     return (type.compare("Sound") == 0) ? true : false;
     

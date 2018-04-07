@@ -29,6 +29,9 @@ public:
     void Open(std::string file);
     bool IsOpen();
     
+    // Adicionada para controlar destructor de som.
+    bool IsPlaying();
+    
     // Override Component
     void Update(float dt);
     void Render();

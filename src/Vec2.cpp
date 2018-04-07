@@ -59,7 +59,7 @@ Vec2 Vec2::Normalized(){
 }
 
 /// Brief: O modulo da distancia entre os 2 vetores;
-float Vec2::DistanceTo (Vec2 v){
+float Vec2  ::DistanceTo (Vec2 v){
     return (v - *this).Magnitude();
 }
 
@@ -68,19 +68,14 @@ float Vec2::Inclination(){
     return acos(cos(x/ this->Magnitude()));
 }
 
-/// TODO
+/// TODO: Inclination
 float Vec2::InclinationWith (Vec2 v){
     return 1.0;
 }
 
-/// TODO
 Vec2 Vec2::GetRotated(float angle){
-    // M_PI rad = 180º
-    // 1 rad = 180 / M_PI
-    float rad = 180 / M_PI;
-    float angleInRad = angle;
-    float rotX = x * cos(angleInRad) - y * sin(angleInRad);
-    float rotY = x * sin(angleInRad) + y * cos(angleInRad);
+    float rotX = x * cos(angle) - y * sin(angle);
+    float rotY = x * sin(angle) + y * cos(angle);
     return Vec2(rotX, rotY);
 }
 
