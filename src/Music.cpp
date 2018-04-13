@@ -8,6 +8,7 @@
 
 
 #include "../include/Music.h"
+#include "../include/Resources.h"
 
 Music::Music(){
     music = nullptr;
@@ -31,13 +32,8 @@ void Music::Stop(int msToStop){
 void Music::Open(const char* file){
     if (music != nullptr){
         Stop();
-        Mix_FreeMusic(music);
     }
-    music = Mix_LoadMUS(file);
-    if (music == nullptr){
-        std::cout << "error loading music: " << file << std::endl;
-        exit(-1);
-    }
+  music = Resources::GetMusic(file);
 }
 
 bool Music::IsOpen(){

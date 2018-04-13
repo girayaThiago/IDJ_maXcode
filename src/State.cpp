@@ -20,16 +20,24 @@ State::State() {
 }
 
 void State::LoadAssets() {
-    GameObject *background = new GameObject();
-    background->box.x = 0;
-    background->box.y = 0;
-    Sprite *bg = new Sprite(*background, "./assets/img/ocean.jpg");
-    background->AddComponent(bg);
-    objectArray.emplace_back(background);
-
+  GameObject *background = new GameObject();
+  background->box.x = 0;
+  background->box.y = 0;
+  Sprite *bg = new Sprite(*background, "./assets/img/ocean.jpg");
+  background->AddComponent(bg);
+  objectArray.emplace_back(background);
+  
+  GameObject* tiles = new GameObject();
+  tiles->box.x = 0;
+  tiles->box.y = 0;
+  TileSet* ts = new TileSet(*tiles, 64, 64, "./assets/img/tileset.png");
+  TileMap* tm = new TileMap(*tiles, "./assets/map/tileMap.txt", ts);
+  tiles->AddComponent(tm);
+  objectArray.emplace_back(tiles);
+  
+  
     music.Open("./assets/audio/stageState.ogg");
     music.Play(); /// só para testar
-
 }
 
 State::~State(){
@@ -58,11 +66,6 @@ void State::Input(){
             for(int i = (int)objectArray.size()-1; i >= 0; i--) {
                 // Obtem o ponteiro e casta pra Face.
                 GameObject* go = (GameObject*) objectArray[i].get();
-                // Nota: Desencapsular o ponteiro é algo que devemos evitar ao máximo.
-                // O propósito do unique_ptr é manter apenas uma cópia daquele ponteiro,
-                // ao usar get(), violamos esse princípio e estamos menos seguros.
-                // Esse código, assim como a classe Face, é provisório. Futuramente, para
-                // chamar funções de GameObjects, use objectArray[i]->função() direto.
 //                std::cout << "box " << i << ":\n\tx: " << go->box.x << " y: " << go->box.y << "\n\tw: " << go->box.w << " h: " << go->box.h << std::endl;
                 if(go->box.Contains( mouseX, mouseY) ) {
                     Face* face = (Face*)go->GetComponent( "Face" );
@@ -101,7 +104,11 @@ void State::Update(float dt){
         if (objectArray[i]->IsDead()){
             // esperar o som tocar antes de remover
             Sound* s = (Sound *) objectArray[i]->GetComponent("Sound");
-            if (s) if (!(s->IsPlaying())){
+            if (s) {
+                if (!(s->IsPlaying())) {
+                    objectArray.erase(objectArray.begin()+i);
+                }
+            } else {
                 objectArray.erase(objectArray.begin()+i);
             }
         }
@@ -127,10 +134,7 @@ void State::AddObject(int mouseX, int mouseY){
     Face* pengface = new Face(*obj);
     obj->AddComponent(pengface);
     
-    
     objectArray.emplace_back(obj);
-//    pengface->Damage(0);
-    
     
 }
 

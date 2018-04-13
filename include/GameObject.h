@@ -34,7 +34,7 @@ public:
     
     Rect box;
 private:
-    std::vector<std::unique_ptr<Component>> components;
+    std::vector<Component*> components;
     bool isDead;
 };
 

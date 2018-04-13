@@ -25,6 +25,7 @@ void Face::Damage(int damage){
         Sprite* spr = (Sprite *) associated.GetComponent("Sprite");
         if (spr) associated.RemoveComponent(spr);
         associated.RemoveComponent(this);
+        
     }
 }
 

@@ -42,7 +42,7 @@ void GameObject::AddComponent(Component* cpt){
 
 void GameObject::RemoveComponent(Component* cpt){
     for (int  i = 0; i < components.size(); i++){
-        if (components[i].get() == cpt) {
+        if (components[i] == cpt) {
             components.erase(components.begin()+i);
             break;
         }
@@ -52,7 +52,7 @@ void GameObject::RemoveComponent(Component* cpt){
 Component* GameObject::GetComponent(std::string type){
     for (int i = 0; i < components.size(); i++){
         if (components[i]->Is(type)) {
-            return components[i].get();
+            return components[i];
         }
     }
     return nullptr;

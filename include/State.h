@@ -18,6 +18,8 @@
 #include "../include/Music.h"
 #include "../include/SDL_include.h"
 #include "../include/GameObject.h"
+#include "../include/TileMap.h"
+
 
 class State{
 private:

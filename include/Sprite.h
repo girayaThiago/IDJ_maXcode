@@ -14,6 +14,7 @@
 #define INCLUDE_SDL_IMAGE
 
 #include <iostream>
+#include <stdlib.h>
 #include "../include/Component.h"
 #include "../include/SDL_include.h"
 
@@ -40,7 +41,9 @@ public:
     void Render ();
     void Update(float dt);
     bool Is(std::string type);
+    // Utility
+    void Render(int x, int y);
+    
 };
-
 
 #endif /* Sprite_h */

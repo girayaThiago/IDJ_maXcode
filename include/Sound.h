@@ -36,6 +36,8 @@ public:
     void Update(float dt);
     void Render();
     bool Is(std::string type);
+    // Utility
+    
 private:
     Mix_Chunk* chunk;
     int channel;

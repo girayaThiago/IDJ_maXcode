@@ -9,6 +9,7 @@
 #include <iostream>
 #include "../include/Game.h"
 #include "../include/Sound.h"
+#include "../include/Resources.h"
 
 //void ChannelDone(int channel){
 ////    associated.RequestDelete();
@@ -42,14 +43,7 @@ void Sound::Stop(){
 }
 
 void Sound::Open(std::string file){
-    if (chunk){
-        Mix_FreeChunk(chunk);
-    }
-    chunk = Mix_LoadWAV(file.c_str());
-    if (!chunk){
-        std::cout << "Error loading file: " << file << std::endl;
-        exit(-1);
-    }
+  chunk = Resources::GetSound(file);
 }
 
 bool Sound::IsOpen(){

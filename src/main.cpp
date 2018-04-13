@@ -14,6 +14,5 @@ int main(int argc, const char * argv[]) {
     std::cout << "main()\n";
 //    Game::GetInstance().GetState()->LoadAssets();
     Game::GetInstance().Run();
-
     return 0;
 }
