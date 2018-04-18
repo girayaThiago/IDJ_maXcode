@@ -11,7 +11,6 @@
 #ifndef GameObject_h
 #define GameObject_h
 
-#include <memory>
 #include <stdio.h>
 #include <vector>
 #include "../include/Component.h"

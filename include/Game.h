@@ -21,17 +21,19 @@
 
 class Game{
 private:
-    static Game* instance;
-    SDL_Window* window;
-    SDL_Renderer* renderer;
-    State* state;
-    Game(std::string title, int width, int height);
+  static Game* instance;
+  SDL_Window* window;
+  SDL_Renderer* renderer;
+  State* state;
+  Game(std::string title, int width, int height);
+
+
 public:
-    ~Game();
-    static Game& GetInstance();
-    void Run();
-    State* GetState();
-    SDL_Renderer* GetRenderer();
+  ~Game();
+  static Game& GetInstance();
+  void Run();
+  State* GetState();
+  SDL_Renderer* GetRenderer();
 };
 
 #endif /* Game_h */

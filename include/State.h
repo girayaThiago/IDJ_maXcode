@@ -14,11 +14,11 @@
 
 #include <memory>
 #include <vector>
-#include "../include/Sprite.h"
+//#include "../include/Sprite.h" //utilizado apenas no .cpp comentado;
 #include "../include/Music.h"
-#include "../include/SDL_include.h"
 #include "../include/GameObject.h"
-#include "../include/TileMap.h"
+//#include "../include/TileMap.h" //utilizado apenas no .cpp comentado;
+#include "../include/SDL_include.h"
 
 
 class State{
@@ -32,7 +32,7 @@ public:
     State();
     ~State();
     
-    void Input();
+//    void Input();
     void AddObject(int mouseX, int mouseY);
     bool QuitRequested();
     void LoadAssets();

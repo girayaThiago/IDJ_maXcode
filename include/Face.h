@@ -5,6 +5,7 @@
 //  Created by Thiago Dantas on 31/03/18.
 //  Copyright © 2018 Thiago Dantas. All rights reserved.
 //
+#pragma once
 
 #ifndef Face_h
 #define Face_h

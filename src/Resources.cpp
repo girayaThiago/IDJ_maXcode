@@ -38,7 +38,6 @@ Mix_Music* Resources::GetMusic(std::string file){
       std::cout << "error loading music: " << file << std::endl;
       exit(-1);
     }
-    
   }
   return musicTable[file];
 }
