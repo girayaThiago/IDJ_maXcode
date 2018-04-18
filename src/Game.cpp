@@ -41,7 +41,8 @@ Game::Game(std::string title, int width, int height){
     std::cout << "Error creating Renderer!" << std::endl;
     exit(-1);
   }
-
+  frameStart = 0;
+  dt = 0;
   state = new State();
 }
 
@@ -73,10 +74,21 @@ void Game::Run(){
   state->LoadAssets();
   
   while (state->QuitRequested() == false){
+    CalculateDeltaTime();
     InputManager::GetInstance().Update();
-    state->Update(0.033);
+    state->Update(GetDeltaTime());
     state->Render();
     SDL_RenderPresent(renderer);
     SDL_Delay(33);
   }
+}
+
+void Game::CalculateDeltaTime(){
+  dt = frameStart - SDL_GetTicks();
+  dt /= 1000; // converter em segundos;
+  frameStart = SDL_GetTicks(); // aribui o valor do frame atual para frameStart
+}
+
+float Game::GetDeltaTime(){
+  return dt;
 }

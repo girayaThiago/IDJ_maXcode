@@ -35,7 +35,7 @@ void TileMap::SetTileSet(TileSet* tileSet){
 }
 int& TileMap::At(int x,int  y,int z){
   
-  int index = x + (y * mapWidth)+ (z * mapWidth * mapHeight);
+  int index = x + (y * mapWidth) + (z * mapWidth * mapHeight);
 //  printf("indice calculado = %d\n", index);
   return tileMatrix[index];
 }

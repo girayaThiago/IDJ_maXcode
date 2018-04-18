@@ -19,26 +19,27 @@
 #include "../include/GameObject.h"
 //#include "../include/TileMap.h" //utilizado apenas no .cpp comentado;
 #include "../include/SDL_include.h"
+#include "../include/Camera.h"
 
 
 class State{
 private:
-    std::vector<std::unique_ptr<GameObject>> objectArray;
-//    std::vector<GameObject*> objectArray;
-    Music music;
-    bool quitRequested;
+  std::vector<std::unique_ptr<GameObject>> objectArray;
+  Camera camera;
+  Music music;
+  
+  bool quitRequested;
 
 public:
-    State();
-    ~State();
+  State();
+  ~State();
     
 //    void Input();
-    void AddObject(int mouseX, int mouseY);
-    bool QuitRequested();
-    void LoadAssets();
-    void Update(float dt);
-    void Render();
-    
+  void AddObject(int mouseX, int mouseY);
+  bool QuitRequested();
+  void LoadAssets();
+  void Update(float dt);
+  void Render();
 };
 
 #endif /* State_h */

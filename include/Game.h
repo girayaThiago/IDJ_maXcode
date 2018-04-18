@@ -27,13 +27,18 @@ private:
   State* state;
   Game(std::string title, int width, int height);
 
-
+  int frameStart;
+  float dt;
+  void CalculateDeltaTime();
+  
 public:
   ~Game();
   static Game& GetInstance();
   void Run();
   State* GetState();
   SDL_Renderer* GetRenderer();
+  
+  float GetDeltaTime();
 };
 
 #endif /* Game_h */
