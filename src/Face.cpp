@@ -16,7 +16,7 @@ Face::Face(GameObject& associated): Component(associated){
 
 void Face::Damage(int damage){
   hitpoints -= damage;
-  std::cout << "apanhei " << damage << " vida restante = " << hitpoints << "\n";
+//  std::cout << "apanhei " << damage << " vida restante = " << hitpoints << "\n";
   if (hitpoints <= 0 && !associated.IsDead()){
     Sound* s = (Sound*) associated.GetComponent("Sound");
     if (s) s->Play();

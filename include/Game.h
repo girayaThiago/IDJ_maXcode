@@ -27,7 +27,7 @@ private:
   State* state;
   Game(std::string title, int width, int height);
 
-  int frameStart;
+  uint32_t frameStart;
   float dt;
   void CalculateDeltaTime();
   

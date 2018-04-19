@@ -15,13 +15,13 @@
 
 class Camera{
 public:
-  void NewFocus(GameObject* newFocus);
-  void Unfollow();
-  void Update(float dt);
-  Vec2 pos;
-  Vec2 speed;
+  static void NewFocus(GameObject* newFocus);
+  static void Unfollow();
+  static void Update(float dt);
+  static Vec2 pos;
+  static Vec2 speed;
 private:
-  GameObject* focus;
+  static GameObject* focus;
 };
 
 #endif /* Camera_h */

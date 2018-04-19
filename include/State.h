@@ -25,7 +25,6 @@
 class State{
 private:
   std::vector<std::unique_ptr<GameObject>> objectArray;
-  Camera camera;
   Music music;
   
   bool quitRequested;

@@ -43,7 +43,12 @@ Rect& Rect::operator-(const Vec2& rhs){
     return *this;
 }
 
-/// TODO;
+Rect& Rect::operator=(const Vec2& rhs){
+  this->x = rhs.x;
+  this->y = rhs.y;
+  return *this;
+}
+
 bool Rect::IsPointInside(Vec2& p){
     bool inside = true;
     if (p.x < x || p.x > x+w) inside = false;

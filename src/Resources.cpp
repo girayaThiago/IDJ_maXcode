@@ -56,7 +56,6 @@ Mix_Chunk* Resources::GetSound(std::string file){
       std::cout << "error loading sound: " << file << std::endl;
       exit(-1);
     }
-    
   }
   return soundTable[file];
 }

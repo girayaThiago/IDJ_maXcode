@@ -20,7 +20,6 @@
 State::State() {
   quitRequested = false;
   music = Music();
-  camera = Camera();
 }
 
 void State::LoadAssets() {
@@ -39,9 +38,8 @@ void State::LoadAssets() {
   tiles->AddComponent(tm);
   objectArray.emplace_back(tiles);
   
-  
-    music.Open("./assets/audio/stageState.ogg");
-    music.Play(); /// só para testar
+  music.Open("./assets/audio/stageState.ogg");
+  music.Play(); /// só para testar
 }
 
 State::~State(){
@@ -54,8 +52,8 @@ void State::Update(float dt){
     quitRequested = true;
   }
   if (manager.KeyPress(SPACE_KEY)){
-    Vec2 objPos = Vec2( 200, 0 ).GetRotated( -M_PI + M_PI*(rand() % 1001)/500.0 );
-    AddObject(manager.GetMouseX() + objPos.x, manager.GetMouseY() + objPos.y);
+    
+    AddObject(manager.GetMouseX(), manager.GetMouseY());
   }
   if (manager.MousePress(LEFT_MOUSE_BUTTON)){
     int mouseX = manager.GetMouseX();
@@ -71,16 +69,19 @@ void State::Update(float dt){
       }
     }
   }
-  if (manager.KeyPress(LEFT_ARROW_KEY) || manager.KeyPress(RIGHT_ARROW_KEY)) {
-    if (manager.KeyPress(LEFT_ARROW_KEY) && manager.KeyPress(RIGHT_ARROW_KEY)) {
-      camera.speed.x = 0;
-    } else if (manager.KeyPress(LEFT_ARROW_KEY)) {
-      camera.speed.x = -10;
-    } else { //RIGHT_ARROW_KEY
-      camera.speed.x = 10;
-    }
+  
+  int cameraSpeed = 100; // usando speed temporariamente apenas para controlar velocidade no eixo horizontal.
+  if (manager.KeyPress(LEFT_ARROW_KEY)) {
+    Camera::speed.y = -cameraSpeed;
+  } else if (manager.KeyRelease(LEFT_ARROW_KEY)){
+    Camera::speed.y = 0;
   }
-  camera.Update(dt);
+  if (manager.KeyPress(RIGHT_ARROW_KEY)){
+    Camera::speed.x = cameraSpeed;
+  } else if (manager.KeyRelease(RIGHT_ARROW_KEY)){
+    Camera::speed.x = 0;
+  }
+  Camera::Update(dt);
   for (int i = 0;  i < objectArray.size(); i++){
     objectArray[i]->Update(dt);
   }
@@ -102,27 +103,28 @@ void State::Update(float dt){
 }
 
 void State::Render(){
-    for (int i = 0; i < objectArray.size(); i++){
-        objectArray[i]->Render();
-    }
+  for (int i = 0; i < objectArray.size(); i++){
+    objectArray[i]->Render();
+  }
 }
 
 void State::AddObject(int mouseX, int mouseY){
-    GameObject* obj = new GameObject();
-    Sprite* pengimg = new Sprite(*obj, "./assets/img/penguinface.png");
-    obj->box.x = mouseX - obj->box.w/2;
-    obj->box.y = mouseY - obj->box.h/2;
-    obj->AddComponent(pengimg);
+  Vec2 objPos = Vec2( 200, 0 ).GetRotated( -M_PI + M_PI*(rand() % 1001)/500.0 );
+  GameObject* obj = new GameObject();
+  Sprite* pengimg = new Sprite(*obj, "./assets/img/penguinface.png");
+  obj->box.x = mouseX - obj->box.w/2 + objPos.x;
+  obj->box.y = mouseY - obj->box.h/2 + objPos.y;
+  obj->AddComponent(pengimg);
     
-    Sound* pengsound = new Sound(*obj, "./assets/audio/boom.wav");
-    obj->AddComponent(pengsound);
+  Sound* pengsound = new Sound(*obj, "./assets/audio/boom.wav");
+  obj->AddComponent(pengsound);
     
-    Face* pengface = new Face(*obj);
-    obj->AddComponent(pengface);
+  Face* pengface = new Face(*obj);
+  obj->AddComponent(pengface);
     
-    objectArray.emplace_back(obj);
+  objectArray.emplace_back(obj);
 }
 
 bool State::QuitRequested() {
-    return quitRequested;
+  return quitRequested;
 }

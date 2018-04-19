@@ -7,6 +7,7 @@
 //
 
 #include "../include/TileMap.h"
+#include "../include/Camera.h"
 
 TileMap::TileMap(GameObject &associated, std::string file, TileSet* tileSet) : Component(associated){
   Load(file);
@@ -20,15 +21,11 @@ void TileMap::Load(std::string file){
   input.open(file);
   
   input >> mapWidth >> virgula >> mapHeight >> virgula >> mapDepth >> virgula;
-  printf("Map width = %d\n", mapWidth);
-  printf("Map height = %d\n", mapHeight);
-  printf("Map depth = %d\n", mapDepth);
   while (!input.eof()){
     input >> parametro >> virgula;
     
     tileMatrix.emplace_back(parametro-1);
   }
-  
 }
 void TileMap::SetTileSet(TileSet* tileSet){
   this->tileSet = tileSet;
@@ -42,7 +39,7 @@ int& TileMap::At(int x,int  y,int z){
 // Override
 void TileMap::Render(){
   for (int i = 0; i < mapDepth; i++){
-    RenderLayer(i);
+    RenderLayer(i, Camera::pos.x, Camera::pos.y);
   }
 }
 

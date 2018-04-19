@@ -40,7 +40,6 @@ void TileSet::RenderTile(unsigned int index, float x, float y){
       tileSet.Render(x,y);
     }
   }
-  
 }
 
 int TileSet::GetTileWidth(){

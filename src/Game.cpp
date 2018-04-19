@@ -84,7 +84,7 @@ void Game::Run(){
 }
 
 void Game::CalculateDeltaTime(){
-  dt = frameStart - SDL_GetTicks();
+  dt = SDL_GetTicks() - frameStart;
   dt /= 1000; // converter em segundos;
   frameStart = SDL_GetTicks(); // aribui o valor do frame atual para frameStart
 }

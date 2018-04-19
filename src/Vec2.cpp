@@ -79,4 +79,8 @@ Vec2 Vec2::GetRotated(float angle){
     return Vec2(rotX, rotY);
 }
 
+std::ostream& operator<<(std::ostream& os, const Vec2& v){
+  os << "("<< v.x << ", " << v.y << ")";
+  return os;
+}
 
