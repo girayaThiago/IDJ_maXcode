@@ -24,17 +24,19 @@
 
 class State{
 private:
-  std::vector<std::unique_ptr<GameObject>> objectArray;
+  std::vector<std::shared_ptr<GameObject>> objectArray;
   Music music;
-  
+  bool started;
   bool quitRequested;
 
 public:
   State();
   ~State();
-    
-//    void Input();
-  void AddObject(int mouseX, int mouseY);
+  
+  void Start();
+  std::weak_ptr<GameObject> AddObject(GameObject* go);
+  std::weak_ptr<GameObject> GetObjectPtr(GameObject* go);
+//  void AddObject(int mouseX, int mouseY);
   bool QuitRequested();
   void LoadAssets();
   void Update(float dt);

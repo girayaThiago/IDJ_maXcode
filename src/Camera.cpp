@@ -13,7 +13,7 @@
 //Vec2 speed;
 
 Vec2 Camera::pos = Vec2();
-Vec2 Camera::speed = Vec2();
+Vec2 Camera::speed = Vec2(100,100);
 GameObject* Camera::focus = nullptr;
 void Camera::NewFocus(GameObject* newFocus){
   focus = newFocus;
@@ -26,13 +26,19 @@ void Camera::Update(float dt){
     //Se a câmera tiver um foco, faremos com que ele fique centralizado na tela;
     pos = focus->box.GetCenter();
   } else {
-    // Se não houver um foco, devemos responder ao input: Setamos a velocidade da câmera de acordo com dt e com as teclas pressionadas, e somamos à posição.
-//    if (speed.x != 0) {
-//      printf("Camera deveria estar se movendo\n");
-//    }
-    pos.x += (speed.x + speed.y) * dt; //utilizando x e y como controle para movimento na horizontal;
-//    pos.x += speed.x * dt;
-//    pos.y += speed.y * dt;
-    // Speed é setado de acordo com o input durante o main game loop ao apertar as telcas LEFT e RIGHT _KEY
+    InputManager& manager = InputManager::GetInstance();
+    speed = Vec2();
+    if (manager.IsKeyDown(LEFT_ARROW_KEY)) {
+      Camera::pos.x += -Camera::speed.x * dt;
+    }
+    if (manager.IsKeyDown(RIGHT_ARROW_KEY)){
+      Camera::pos.x += Camera::speed.x * dt;
+    }
+    if (manager.IsKeyDown(UP_ARROW_KEY)) {
+      Camera::pos.y += -Camera::speed.y * dt;
+    }
+    if (manager.IsKeyDown(DOWN_ARROW_KEY)){
+      Camera::pos.y += Camera::speed.y * dt;
+    }
   }
 }

@@ -8,10 +8,12 @@
 
 #ifndef Camera_h
 #define Camera_h
+#define INCLUDE_SDL
 
 #include <stdio.h>
 #include "../include/Component.h"
 #include "../include/Vec2.h"
+#include "../include/SDL_include.h"
 
 class Camera{
 public:

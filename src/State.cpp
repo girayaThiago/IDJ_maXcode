@@ -19,7 +19,15 @@
 
 State::State() {
   quitRequested = false;
+  started = false;
   music = Music();
+}
+
+void State::Start(){
+  LoadAssets();
+  for (int i = 0; i < objectArray.size(); i++){
+//    objectArray[i].Start();
+  }
 }
 
 void State::LoadAssets() {
@@ -43,7 +51,7 @@ void State::LoadAssets() {
 }
 
 State::~State(){
-    objectArray.clear();
+  objectArray.clear();
 }
 
 void State::Update(float dt){
@@ -53,7 +61,7 @@ void State::Update(float dt){
   }
   if (manager.KeyPress(SPACE_KEY)){
     
-    AddObject(manager.GetMouseX(), manager.GetMouseY());
+    //    AddObject(manager.GetMouseX(), manager.GetMouseY());
   }
   if (manager.MousePress(LEFT_MOUSE_BUTTON)){
     int mouseX = manager.GetMouseX();
@@ -61,31 +69,19 @@ void State::Update(float dt){
     for (int i = (int)objectArray.size()-1; i >= 0; i--){
       GameObject* go = (GameObject *)objectArray[i].get();
       if (go->box.Contains(mouseX, mouseY)){
-        Face* face = (Face*)go->GetComponent("Face");
-        if (face){
-          face->Damage(std::rand() % 10 + 10);
-          break;
-        }
+//        Face* face = (Face*)go->GetComponent("Face");
+//        if (face){
+//          face->Damage(std::rand() % 10 + 10);
+//          break;
+//        }
       }
     }
-  }
-  
-  int cameraSpeed = 100; // usando speed temporariamente apenas para controlar velocidade no eixo horizontal.
-  if (manager.KeyPress(LEFT_ARROW_KEY)) {
-    Camera::speed.y = -cameraSpeed;
-  } else if (manager.KeyRelease(LEFT_ARROW_KEY)){
-    Camera::speed.y = 0;
-  }
-  if (manager.KeyPress(RIGHT_ARROW_KEY)){
-    Camera::speed.x = cameraSpeed;
-  } else if (manager.KeyRelease(RIGHT_ARROW_KEY)){
-    Camera::speed.x = 0;
   }
   Camera::Update(dt);
   for (int i = 0;  i < objectArray.size(); i++){
     objectArray[i]->Update(dt);
   }
-   
+  
   // TODO: desfazer esse cancer que tá esse update, tentar implementar um callback para o gameobject.
   for (int i = (int)objectArray.size()-1; i >= 0; i--){
     if (objectArray[i]->IsDead()){
@@ -108,22 +104,40 @@ void State::Render(){
   }
 }
 
-void State::AddObject(int mouseX, int mouseY){
-  Vec2 objPos = Vec2( 200, 0 ).GetRotated( -M_PI + M_PI*(rand() % 1001)/500.0 );
-  GameObject* obj = new GameObject();
-  Sprite* pengimg = new Sprite(*obj, "./assets/img/penguinface.png");
-  obj->box.x = mouseX - obj->box.w/2 + objPos.x;
-  obj->box.y = mouseY - obj->box.h/2 + objPos.y;
-  obj->AddComponent(pengimg);
-    
-  Sound* pengsound = new Sound(*obj, "./assets/audio/boom.wav");
-  obj->AddComponent(pengsound);
-    
-  Face* pengface = new Face(*obj);
-  obj->AddComponent(pengface);
-    
-  objectArray.emplace_back(obj);
+std::weak_ptr<GameObject> State::AddObject(GameObject *go){
+  std::shared_ptr<GameObject> weak = std::make_shared<GameObject>(go);
+  objectArray.emplace_back(weak);
+  if (started) {
+//    weak.Start();
+  }
+  return weak;
 }
+
+std::weak_ptr<GameObject> State::GetObjectPtr(GameObject *go){
+  for (int i = 0; i < objectArray.size(); i++){
+    if (go == objectArray[i].get()){
+      return std::make_shared<GameObject>(objectArray[i].get());
+    }
+  }
+  return std::weak_ptr<GameObject>();
+}
+
+//void State::AddObject(int mouseX, int mouseY){
+//  Vec2 objPos = Vec2( 200, 0 ).GetRotated( -M_PI + M_PI*(rand() % 1001)/500.0 );
+//  GameObject* obj = new GameObject();
+//  Sprite* pengimg = new Sprite(*obj, "./assets/img/penguinface.png");
+//  obj->box.x = mouseX - obj->box.w/2 + objPos.x;
+//  obj->box.y = mouseY - obj->box.h/2 + objPos.y;
+//  obj->AddComponent(pengimg);
+//
+//  Sound* pengsound = new Sound(*obj, "./assets/audio/boom.wav");
+//  obj->AddComponent(pengsound);
+//
+//  Face* pengface = new Face(*obj);
+//  obj->AddComponent(pengface);
+//
+//  objectArray.emplace_back(obj);
+//}
 
 bool State::QuitRequested() {
   return quitRequested;

@@ -71,7 +71,7 @@ Game& Game::GetInstance() {
 }
 
 void Game::Run(){
-  state->LoadAssets();
+  state->Start();
   
   while (state->QuitRequested() == false){
     CalculateDeltaTime();

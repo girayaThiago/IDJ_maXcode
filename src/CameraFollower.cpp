@@ -21,3 +21,4 @@ void CameraFollower::Render(){
 bool CameraFollower::Is(std::string type){
   return (type.compare("CameraFollower") == 0) ? true : false;
 }
+

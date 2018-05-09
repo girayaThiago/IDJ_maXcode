@@ -19,14 +19,15 @@ class GameObject;
 
 class Component{
 public:
-    Component(GameObject& associated);
-    virtual ~Component();
-    
-    void virtual Update(float dt) = 0;
-    void virtual Render() = 0;
-    bool virtual Is(std::string type) = 0;
+  Component(GameObject& associated);
+  virtual ~Component();
+  
+  void virtual Update(float dt) = 0;
+  void virtual Render() = 0;
+  bool virtual Is(std::string type) = 0;
+  void virtual Start(){};
 protected:
-    GameObject& associated;
+  GameObject& associated;
 };
 
 
