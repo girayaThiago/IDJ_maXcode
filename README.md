@@ -5,4 +5,6 @@ Projeto se encontra em:
 https://github.com/girayaThiago/IDJ_maXcode
 
 
-Este trabalho foi desenvolvido usando a IDE Xcode, para poder automatizar meus testes adicinei como primeira rotina do makefile a rotina "run" que compila e linka tudo e cria o executavel do jogo que que é executado em seguida.
+Este trabalho foi desenvolvido com a IDE Xcode, que conta com autocomplete para as bibliotecas importadas do SDL2.
+
+O tutorial seguido para setup do Xcode com SDL foi o do Sonar Studios no Youtube: https://www.youtube.com/watch?v=uvxV1xlApm4
